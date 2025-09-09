@@ -1,0 +1,66 @@
+.DanhGiaDon {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00000030;
+}
+
+.DanhGiaDon_content {
+    padding: 20px;
+    background-color: #fff;
+    width: 600px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border: 1px solid #ccc;
+}
+
+.DanhGiaDon_content>h3 {
+    text-align: center;
+}
+
+.DanhGiaDon_form {
+    margin-top: 20px;
+}
+
+.DanhGiaDon_form > h3 {
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.DanhGiaDon_form-select {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.DanhGiaDon_form-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.DanhGiaDon_form-option >p {
+    font-size: 18px;
+}
+
+.DanhGiaDon_form-option >i {
+    font-size: 18px;
+}
+
+.DanhGiaDon_form-textarea {
+    font-size: 18px;
+}
+
+.DanhGiaDon_form-submit {
+    padding: 10px;
+    width: 100%;
+    background-color: var(--primary-color);
+    border-radius: var(--border-radius);
+    margin-top: 20px;
+    color: #fff;
+}

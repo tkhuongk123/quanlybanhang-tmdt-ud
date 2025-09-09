@@ -1,0 +1,17 @@
+.QuanLySanPham_content {
+    padding: 20px;
+}
+
+.QuanLySanPham_content>h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.QuanLySanPham_content-them {
+    background-color: var(--primary-color);
+    padding: 10px;
+    width: 100px;
+    color: #fff;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+}
