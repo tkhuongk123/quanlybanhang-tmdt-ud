@@ -4,13 +4,17 @@ import App from './App';
 import Toast from './components/components/Toast';
 import GlobalStyles from "./components/GlobalStyles";
 import reportWebVitals from './reportWebVitals';
+import { StatProvider } from './store/StatContext';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <GlobalStyles>
-      <App />
-      <Toast />
+      <StatProvider>
+        <App />
+        <Toast />
+      </StatProvider>
     </GlobalStyles>
   </React.StrictMode>
 );

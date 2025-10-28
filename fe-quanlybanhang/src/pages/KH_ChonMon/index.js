@@ -1,11 +1,11 @@
 import ChonMon from "../../components/ChucNang/ChonMon";
 
-function TrangChu() {
+function KH_ChonMon() {
     return (
-        <main className="TrangChu">
+        <main className="ChonMon">
             <ChonMon />
         </main>
     )
 }
 
-export default TrangChu
+export default KH_ChonMon;

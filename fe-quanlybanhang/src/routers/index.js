@@ -1,7 +1,9 @@
 // Page
 import Login from "../pages/Login";
 
-import TrangChu from "../pages/TrangChu";
+import TrangChu from "../pages/KH_TrangChu";
+import ChonMon from "../pages/KH_ChonMon";
+import MomoCallback from "../pages/MomoCallback";
 import GioHang from "../pages/GioHang";
 import DonHang from "../pages/DonHang";
 import DanhGia from "../pages/DanhGia";
@@ -26,10 +28,12 @@ import Bep_TraDon from "../pages/Bep_TraDon";
 // Layout
 import { LoginLayout } from "../components/Layouts";
 
+
 const khachHangRoutes = [
     { path: '/', component: TrangChu, },
-
+    { path: '/chonmon', component: ChonMon, },
     { path: '/auth/giohang', component: GioHang, },
+    { path: '/momo/callback', component: MomoCallback, },
     { path: '/donhang', component: DonHang, },
     { path: '/danhgia', component: DanhGia, },
 ]
@@ -41,6 +45,7 @@ const nhanVienRoutes = [
 ]
 
 const quanLyRoutes = [
+    { path: '/quanly/thongke', component: QL_ThongKe, },
     { path: '/quanly/donhang', component: QL_DonHang, },
     { path: '/quanly/thongke', component: QL_ThongKe, },
     { path: '/quanly/xemdanhgia', component: QL_XemDanhGia, },

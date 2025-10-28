@@ -8,16 +8,21 @@ function Them(props) {
 
   const themLoaiSanPham = async (values) => {
     const data = await them(values);
-    if (data.error) {
+    if (data.error) 
+    {
       NotifyError(data.error);
-    } else if (data.inputInvalid) {
+    } 
+    else if (data.inputInvalid) 
+    {
       form.setFields([
         {
           name: data.inputInvalid,
           errors: [data.messageInvalid],
         },
       ]);
-    } else {
+    } 
+    else 
+    {
       NotifySuccess("Thêm loại sản phẩm thành công");
       const newDs = [...props.dsLoaiSanPham]
       values.id = data.loaiSanPham
@@ -31,7 +36,8 @@ function Them(props) {
     <div
       className="Them"
       onClick={(e) => {
-        if (e.target.className === "Them") {
+        if (e.target.className === "Them") 
+        {
           props.setChucNang("");
         }
       }}

@@ -5,7 +5,7 @@ function Footer() {
     <footer className="Footer">
       <div className="Footer_content">
         <div className="Footer_content-left">
-          <h2>PT KITCHEN</h2>
+          <h2>PURETASTE KITCHEN</h2>
           <p>
             Nơi trải nghiệm sự thăng hoa của ẩm thực, mang hương vị nhà hàng đến
             với gia đình bạn.

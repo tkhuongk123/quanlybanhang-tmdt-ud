@@ -17,12 +17,18 @@ function QuanLySanPham() {
     (async () => {
       const dataLoaiSanPham = await layDs();
       const data = await layDsSanPham();
-      if (data.error) {
+      if (data.error) 
+      {
         console.log(data.error);
-      } else {
-        for (let x of dataLoaiSanPham.dsLoaiSanPham) {
-          for (let y of data.dsSanPham) {
-            if (x.id === y.idloaisanpham) {
+      } 
+      else 
+      {
+        for (let x of dataLoaiSanPham.dsLoaiSanPham) 
+        {
+          for (let y of data.dsSanPham) 
+          {
+            if (x.id === y.idloaisanpham) 
+            {
               y.tenloaisanpham = x.ten;
             }
           }
@@ -31,7 +37,7 @@ function QuanLySanPham() {
         setDSLoaiSanPham(dataLoaiSanPham.dsLoaiSanPham);
       }
     })();
-  }, []);
+  }, [chucNang]);
 
   const dataSource = dsSanPham.map((item, index) => {
     return {
@@ -52,6 +58,7 @@ function QuanLySanPham() {
                 index={index}
                 setDsSanPham={setDsSanPham}
                 dsLoaiSanPham={dsLoaiSanPham}
+                
               />
             );
           }}

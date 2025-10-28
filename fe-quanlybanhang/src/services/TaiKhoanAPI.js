@@ -33,6 +33,27 @@ export const layDsTaiKhoan = async () => {
   }
 };
 
+export const tongTaiKhoan = async () => {
+  try {
+    const response = await axios.get(`${api}/taikhoan/tongTaiKhoan`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const capNhatDiaChi = async (id, diachi) => {
+  try {
+    const response = await axios.post(`${api}/taikhoan/capNhatDiaChi`, {
+      id,
+      diachi
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 
 
 export const them = async ({

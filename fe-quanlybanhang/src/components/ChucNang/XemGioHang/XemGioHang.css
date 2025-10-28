@@ -1,6 +1,23 @@
+.XemGioHang_content {
+    padding: 20px;
+}
+
 .XemGioHang_content >h2{
     text-align: center;
     margin: 20px 0 10px;
+}
+
+.XemGioHang_content .XemGioHang_address {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #f1f1f1;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.XemGioHang_content .XemGioHang_address .content {
+    display: flex;
 }
 
 .XemGioHang_item-delete {

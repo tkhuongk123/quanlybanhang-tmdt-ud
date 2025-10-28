@@ -6,7 +6,15 @@ import { capNhatDonHang } from "../../../services/DonHangAPI";
 import {NotifyError, NotifySuccess, NotifyWarning} from "../Toast"
 import { useState } from "react";
 import ChiTietDonHang from "./ChiTietDonHang";
-import DanhGiaDon from "./DanhGiaDon"
+import DanhGiaDon from "./DanhGiaDon";
+import { layChiTietTheoDon } from "../../../services/ChiTietDonHangAPI";
+import { laySanPhamTheoId } from "../../../services/SanPhamAPI";
+import pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.vfs;
+
+
+
 
 function DanhSachDonHang(props) {
   const [chiTietDonHang, setChiTietDonHang] = useState('')
@@ -22,6 +30,7 @@ function DanhSachDonHang(props) {
         trangthai: formatTrangThai(item.trangthai),
         tongsanpham: item.tongsanpham,
         tongtien: formatPrice(item.tongtien),
+        diachi: item.diachi,
         chitiet: (
           <div className="chucNang3">
             <div className="chucNang3_content" onClick={() => {
@@ -60,6 +69,11 @@ function DanhSachDonHang(props) {
         title: "Tổng tiền",
         dataIndex: "tongtien",
         key: "tongtien",
+      },
+      {
+        title: "Địa chỉ",
+        dataIndex: "diachi",
+        key: "diachi",
       },
       {
         title: "Chi tiết",
@@ -490,6 +504,7 @@ function DanhSachDonHang(props) {
         trangthai: formatTrangThai(item.trangthai),
         tongsanpham: item.tongsanpham,
         tongtien: formatPrice(item.tongtien),
+        diachi: item.diachi,
         chitiet: (
           <div className="chucNang3">
             <div className="chucNang3_content" onClick={() => {
@@ -533,6 +548,11 @@ function DanhSachDonHang(props) {
         title: "Tổng tiền",
         dataIndex: "tongtien",
         key: "tongtien",
+      },
+      {
+        title: "Địa chỉ",
+        dataIndex: "diachi",
+        key: "diachi",
       },
       {
         title: "Chi tiết",
@@ -649,9 +669,77 @@ function DanhSachDonHang(props) {
     }
   }
 
-  const xuathoadon = (item) => {
-    console.log(item)
-  }
+
+  const xuathoadon = async (item) => {
+    const data = await layChiTietTheoDon({ iddonhang: item.id });
+    const newDs = [];
+
+    for (let x of data.dsChiTiet) {
+      const dataSP = await laySanPhamTheoId({ id: x.idsanpham });
+      dataSP.sanPham.soluong = x.soluong;
+      newDs.push(dataSP.sanPham);
+    }
+
+    if (!data.dsChiTiet || newDs.length === 0) {
+      NotifyError("Lỗi xuất hóa đơn");
+      return;
+    }
+
+    // Chuẩn bị bảng chi tiết sản phẩm
+    const ctsp = newDs.map((sp) => {
+      const thanhTien = sp.dongia * sp.soluong;
+      return [
+          { text: sp.ten, alignment: "left" },
+          { text: sp.soluong.toString(), alignment: "center" },
+          { text: sp.dongia.toLocaleString(), alignment: "right" },
+          { text: thanhTien.toLocaleString(), alignment: "right" }
+        ];
+      });
+
+      // Định nghĩa tài liệu PDF
+      const docDefinition = {
+        content: [
+          { text: "HÓA ĐƠN BÁN HÀNG", style: "header", alignment: "center" },
+          { text: `Mã hóa đơn: ${item.id}`, margin: [0, 20, 0, 0] },
+          { text: `Người đặt: ${item.nguoidat}` },
+          { text: `Địa chỉ: ${item.diachi}` },
+          { text: `Ngày đặt: ${item.ngay}` },
+          { text: `Ghi chú: ${item.ghichu || "Không có"}` },
+
+          {
+            style: "tableExample",
+            table: {
+              headerRows: 1,
+              widths: ["*", "auto", "auto", "auto"],
+              body: [
+                [
+                  { text: "Sản phẩm", bold: true },
+                  { text: "Số lượng", bold: true },
+                  { text: "Đơn giá", bold: true },
+                  { text: "Thành tiền", bold: true }
+                ],
+                ...ctsp
+              ]
+            },
+            margin: [0, 20, 0, 0]
+          },
+
+          { text: `Tổng sản phẩm: ${item.tongsanpham}`, margin: [0, 20, 0, 0] },
+          { text: `Tổng tiền: ${item.tongtien.toLocaleString()} VND` }
+        ],
+        styles: {
+          header: { fontSize: 16, bold: true },
+          tableExample: { margin: [0, 5, 0, 15] }
+        },
+        defaultStyle: {
+          font: "Roboto"
+        }
+    };
+
+    // Xuất PDF
+    pdfMake.createPdf(docDefinition).download(`HoaDon_${item.id}.pdf`);
+  };
+
 
   return (
     <div className="DanhSachDonhang">

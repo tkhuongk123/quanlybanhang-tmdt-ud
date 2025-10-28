@@ -17,13 +17,13 @@ function DangNhap() {
             if(data.taiKhoan) {
                 sessionStorage.setItem('nguoidung', JSON.stringify(data.taiKhoan))
                 if(data.taiKhoan.idquyen === 0) {
-                    window.location.href = "/nhanvien/nhandon"
+                    window.location.href = "/quanly/thongke";
                 } else if(data.taiKhoan.idquyen === 1) {
-                    window.location.href = "/quanly/donhang"
+                    window.location.href = "/nhanvien/nhandon";
                 } else if(data.taiKhoan.idquyen === 2) {
-                    window.location.href = "/bep/nhandon"
-                } else {
-                    window.location.reload()
+                    window.location.href = "/bep/nhandon";
+                } else if(data.taiKhoan.idquyen === 3) {
+                    window.location.reload();
                 }
             } else {
                 NotifyError(data.error)

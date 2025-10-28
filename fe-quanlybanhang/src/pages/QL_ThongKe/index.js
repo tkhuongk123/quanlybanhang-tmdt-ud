@@ -1,8 +1,9 @@
+import QuanLyThongKe from "../../components/ChucNang/QuanLyThongKe"
 
 function QL_ThongKe() {
     return (
         <main className="QL_ThongKe">
-            QL_ThongKe
+            <QuanLyThongKe />
         </main>
     )
 }

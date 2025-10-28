@@ -15,30 +15,11 @@ function Toolbar() {
         <>
           <li
             onClick={() => {
-              navigate("/nhanvien/nhandon");
+              navigate("/quanly/thongke");
             }}
           >
-            Nhận đơn
+            Thống kê
           </li>
-          <li
-            onClick={() => {
-              navigate("/nhanvien/tradon");
-            }}
-          >
-            Trả đơn
-          </li>
-          <li
-            onClick={() => {
-              navigate("/nhanvien/xuathoadon");
-            }}
-          >
-            Xuất hóa đơn
-          </li>
-        </>
-      );
-    } else if (nguoidung.idquyen === 1) {
-      setDsChucNang(
-        <>
           <li
             onClick={() => {
               navigate("/quanly/donhang");
@@ -76,6 +57,33 @@ function Toolbar() {
           </li>
         </>
       );
+      
+    } else if (nguoidung.idquyen === 1) {
+      setDsChucNang(
+        <>
+          <li
+            onClick={() => {
+              navigate("/nhanvien/nhandon");
+            }}
+          >
+            Nhận đơn
+          </li>
+          <li
+            onClick={() => {
+              navigate("/nhanvien/tradon");
+            }}
+          >
+            Trả đơn
+          </li>
+          <li
+            onClick={() => {
+              navigate("/nhanvien/xuathoadon");
+            }}
+          >
+            Xuất hóa đơn
+          </li>
+        </>
+      );
     } else if (nguoidung.idquyen === 2) {
       setDsChucNang(
         <>
@@ -104,6 +112,13 @@ function Toolbar() {
             }}
           >
             Trang chủ
+          </li>
+          <li
+            onClick={() => {
+              navigate("/chonmon");
+            }}
+          >
+            Chọn món
           </li>
           <li
             onClick={() => {

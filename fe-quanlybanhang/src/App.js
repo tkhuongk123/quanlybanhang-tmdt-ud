@@ -47,7 +47,7 @@ function App() {
         <div className="App">
           <Routes>
             {
-              nhanVienRoutes.map((route, index) => {
+              quanLyRoutes.map((route, index) => {
                 const Page = route.component;
                 let Layout = DefaultLayout;
                 if (route.layout) {
@@ -82,7 +82,7 @@ function App() {
         <div className="App">
           <Routes>
             {
-              quanLyRoutes.map((route, index) => {
+              nhanVienRoutes.map((route, index) => {
                 const Page = route.component;
                 let Layout = DefaultLayout;
                 if (route.layout) {

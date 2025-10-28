@@ -1,4 +1,4 @@
-import { xoa } from "../../../../services/SanPhamAPI";
+import { checkSanPham, xoa } from "../../../../services/SanPhamAPI";
 import { NotifyError, NotifySuccess } from "../../../components/Toast";
 import "./Xoa.css";
 
@@ -9,15 +9,22 @@ function Xoa(props) {
     }
 
     const handleOk = async() => {
+        const isExist = await checkSanPham({id: props.sanPham.id});
+        if(isExist.exist)
+        {
+          NotifyError(`Không thể xóa do sản phẩm này đã được bán ra!!!`);
+          props.setChucNang('');
+          return;
+        }
         const data = await xoa({id: props.sanPham.id});
         if(data.error) {
             NotifyError('Xóa sản phẩm không thành công')
         } else {
             const newDs = [...props.dsSanPham];
             newDs.splice(props.index, 1);
-            props.setDsSanPham(newDs)
-            NotifySuccess(`Xóa sản phẩm thành công`)
-            props.setChucNang('')
+            props.setDsSanPham(newDs);
+            NotifySuccess(`Xóa sản phẩm thành công`);
+            props.setChucNang('');
         }
         
     }

@@ -32,13 +32,28 @@ export const layDsSanPham = async () => {
   }
 };
 
-export const them = async ({ idloaisanpham, ten, dongia, mota }) => {
+export const tongSanPham = async () => {
   try {
-    const response = await axios.post(`${api}/sanpham/them`, {
-      idloaisanpham,
-      ten,
-      dongia,
-      mota,
+    const response = await axios.get(`${api}/sanpham/tongSanPham`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const layDsSanPhamPhoBien = async () => {
+  try {
+    const response = await axios.get(`${api}/sanpham/layDsSanPhamPhoBien`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const checkSanPham = async ({ id }) => {
+  try {
+    const response = await axios.post(`${api}/sanpham/checksanpham`, {
+      id
     });
     return response.data;
   } catch (error) {
@@ -46,7 +61,22 @@ export const them = async ({ idloaisanpham, ten, dongia, mota }) => {
   }
 };
 
-export const sua = async ({ idloaisanpham, ten, dongia, mota, id }) => {
+export const them = async ({ idloaisanpham, ten, dongia, mota, image }) => {
+  try {
+    const response = await axios.post(`${api}/sanpham/them`, {
+      idloaisanpham,
+      ten,
+      dongia,
+      mota,
+      image
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const sua = async ({ idloaisanpham, ten, dongia, mota, id, image }) => {
   try {
     const response = await axios.post(`${api}/sanpham/sua`, {
       idloaisanpham,
@@ -54,6 +84,7 @@ export const sua = async ({ idloaisanpham, ten, dongia, mota, id }) => {
       dongia,
       mota,
       id,
+      image
     });
     return response.data;
   } catch (error) {

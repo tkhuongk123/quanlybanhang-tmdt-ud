@@ -1,0 +1,123 @@
+/* CUSTOME CSS */
+.QuanLyThongKe {
+    padding: 20px;
+}
+
+/* HeaderCards */
+.QuanLyThongKe .HeaderCards {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.QuanLyThongKe .HeaderCards .PopularDish {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.QuanLyThongKe .HeaderCards .PopularDish .Dish {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
+.QuanLyThongKe .HeaderCards .PopularDish .Dish .DishName {
+    display: inline-block;   
+    max-width: 120px;       
+    white-space: nowrap;     
+    overflow: hidden;        
+    text-overflow: ellipsis; 
+    vertical-align: middle;
+}
+
+.QuanLyThongKe .HeaderCards .PopularDish .Dish .OrderQuantity {
+    color: #ea580c;
+}
+
+/* ChooseTime */
+.QuanLyThongKe .ChooseTime {
+    margin-top: 30px;
+}
+
+.QuanLyThongKe .ChooseTime .SelectCustome {
+  width: 150px; 
+  padding: 0.5rem 1rem;
+  border: 1px solid #000; 
+  border-radius: 0.5rem; 
+  background-color: white; 
+  color: #000; 
+  transition: all 0.2s ease;
+}
+
+
+
+.QuanLyThongKe .ChooseTime .SelectCustome:focus {
+  outline: none; 
+  border-color: transparent; 
+  box-shadow: 0 0 0 2px #000; 
+}
+
+/* BodyCards */
+.QuanLyThongKe .BodyCards {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.QuanLyThongKe .BodyCards .TotalParams {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+}
+
+
+
+
+/* OVERRIDE ANTD */
+.QuanLyThongKe :global(.ant-card) {
+  background-color: #FFFBEB !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+
+}
+
+/* HeaderCards */
+.QuanLyThongKe .HeaderCards :global(.ant-card) {
+    height: 170px; 
+    width: 230px;
+}
+
+.QuanLyThongKe .HeaderCards :global(.ant-card-head) {
+  color: #333 !important;       
+  font-weight: 400;     
+     
+}
+
+.QuanLyThongKe .HeaderCards :global(.ant-card-body) {
+  color: #464f5c !important;    
+  font-size: 24px;           
+  font-weight: 700;
+}
+
+/* ChooseTime */
+
+
+
+/* BodyCards */
+.QuanLyThongKe .BodyCards :global(.ant-card) {
+    width: 480px;
+    height: 230px; 
+}
+
+.QuanLyThongKe .BodyCards :global(.ant-card-head-title) {
+  color: #333 !important;
+  font-weight: 600;
+}
+
+
+.QuanLyThongKe :global(.ant-card-body) {
+  color: #444 !important;               
+}

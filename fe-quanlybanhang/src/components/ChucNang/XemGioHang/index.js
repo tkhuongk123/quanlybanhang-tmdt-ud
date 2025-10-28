@@ -3,26 +3,42 @@ import "./XemGioHang.css";
 import ThanhPhanGioHang from "../../components/ThongTinSanPham";
 import formatPrice from "../../../utils/formatPrice";
 import ThanhToan from "./ThanhToan";
+import UpdateAddress from "./UpdateAddress";
+import { Input, Form } from "antd";
+import { MapPin } from "lucide-react";
 
 import { laySanPhamTheoId } from "../../../services/SanPhamAPI";
 import { NotifyError } from "../../components/Toast";
 import ThongBaoTrong from "../../components/ThongBaoTrong";
 
 function XemGioHang() {
+  const [form] = Form.useForm();
   const [dsSanPham, setDsSanPham] = useState([]);
+  const [diaChi, setDiaChi] = useState("");
   const [thanhToan, setThanhToan] = useState(<span></span>);
+  const [updateAddress, setUpdateAddress] = useState(<span></span>);
+
+  useEffect(() => {
+    const diachiData = JSON.parse(sessionStorage.getItem("nguoidung")).diachi || "";
+    setDiaChi(diachiData);
+  }, [diaChi]);
 
   useEffect(() => {
     const giohang = JSON.parse(localStorage.getItem("giohang"));
-    if (giohang) {
+    if (giohang) 
+    {
       (async () => {
         const newDs = [];
-        for (let x of giohang) {
+        for (let x of giohang) 
+        {
           const data = await laySanPhamTheoId({ id: x.id });
-          if (data.sanPham) {
+          if (data.sanPham) 
+          {
             data.sanPham.soluong = x.soluong;
             newDs.push(data.sanPham);
-          } else {
+          } 
+          else 
+          {
             NotifyError(data.message);
           }
         }
@@ -72,10 +88,64 @@ function XemGioHang() {
     localStorage.setItem("giohang", JSON.stringify(newDs));
   }
 
+  const handleThanhToan = () => {
+    if (!diaChi || diaChi.trim() === "") {
+      NotifyError("Vui lòng nhập địa chỉ!");
+      return;
+    }
+
+    setThanhToan(
+      <ThanhToan
+        setThanhToan={setThanhToan}
+        tongSanPham={dsSanPham.length}
+        tongTien={tinhTongTien()}
+        dsSanPham={dsSanPham}
+        setDsSanPham={setDsSanPham}
+      />
+    );
+  };
+
   return (
     <div className="XemGioHang">
       <div className="XemGioHang_content">
         <h2>Giỏ hàng của tôi</h2>
+        <div className="XemGioHang_address">
+          <label htmlFor="">Giao đến:</label>
+          <div className="content">
+            <MapPin
+              style={{ transform: 'translateY(3px)' }} 
+            />
+
+    
+            <Input
+              bordered={false}
+              style={{ fontSize: "18px", width: "500px" }}
+              value={diaChi} 
+              readonly
+            />
+
+            <button
+                onClick={() => {
+                  setUpdateAddress(
+                    <UpdateAddress
+                      setDiaChi={setDiaChi}
+                      setUpdateAddress={setUpdateAddress}
+                      diaChi={diaChi}
+                    />
+                  );
+                }}
+                style={{ 
+                  padding: '8px', 
+                  background: '#ee4d2d', 
+                  color: '#fff',
+                  width: '200px',
+                  borderRadius: '4px'
+                }} 
+              >
+                Cập nhật địa chỉ
+            </button>
+          </div>
+        </div>
         <div className="XemGioHang_list">
           {dsSanPham.map((item, index) => {
             return (
@@ -128,17 +198,7 @@ function XemGioHang() {
             </div>
             <div>
               <button
-                onClick={() => {
-                  setThanhToan(
-                    <ThanhToan
-                      setThanhToan={setThanhToan}
-                      tongSanPham={dsSanPham.length}
-                      tongTien={tinhTongTien()}
-                      dsSanPham={dsSanPham}
-                      setDsSanPham={setDsSanPham}
-                    />
-                  );
-                }}
+                onClick={handleThanhToan}
               >
                 Thanh toán
               </button>
@@ -147,6 +207,7 @@ function XemGioHang() {
         )}
       </div>
       {thanhToan}
+      {updateAddress}
     </div>
   );
 }

@@ -8,6 +8,7 @@ export const taoDonHang = async ({
   tongtien,
   tongsanpham,
   ngay,
+  diachi,
   ghichu,
 }) => {
   try {
@@ -18,6 +19,7 @@ export const taoDonHang = async ({
       tongtien,
       tongsanpham,
       ngay,
+      diachi,
       ghichu,
     });
     return response.data;
@@ -29,6 +31,17 @@ export const taoDonHang = async ({
 export const layDanhSach = async () => {
   try {
     const response = await axios.get(`${api}/donhang/layDanhSach`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const layTongSoTienVaDonHangTheoThang = async ({month, year}) => {
+  try {
+    const response = await axios.get(`${api}/donhang/layTongSoTienVaDonHangTheoThang`, {
+      params: { month, year }
+    });
     return response.data;
   } catch (error) {
     throw error;

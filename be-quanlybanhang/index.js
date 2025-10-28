@@ -6,23 +6,27 @@ const routes = require('./src/routes')
 const db = require('./src/config/db')
 const app = express()
 
+
 // Connect DB
-db.connect()
+db.connect();
 
 
 // cors data
-app.use(cors())
+app.use(cors());
 
 // Express middleware
 app.use(
     express.urlencoded({
         extended: true,
     }),
-)
-app.use(express.json())
+);
+app.use(express.json());
 
 // Route init
-routes(app)
+routes(app);
+
+// Public thư mục uploads/images
+app.use("/public", express.static(path.join(__dirname, "public")));
 
 // app listen port
 app.listen(port, () => {

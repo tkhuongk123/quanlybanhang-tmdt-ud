@@ -4,6 +4,7 @@ const DonHangController = require("../controllers/DonHangController.js");
 
 router.post('/taoDonHang', DonHangController.taoDonHang);
 router.get('/layDanhSach', DonHangController.layDanhSach);
+router.get('/layTongSoTienVaDonHangTheoThang', DonHangController.layTongSoTienVaDonHangTheoThang);
 router.post('/capNhatDonHang', DonHangController.capNhatDonHang);
 router.post('/layDanhSachTheoId', DonHangController.layDanhSachTheoId);
 module.exports = router;

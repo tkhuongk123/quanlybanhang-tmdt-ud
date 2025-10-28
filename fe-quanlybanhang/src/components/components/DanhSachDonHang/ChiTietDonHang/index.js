@@ -15,7 +15,6 @@ function ChiTietDonHang(props) {
             const dataSP = await laySanPhamTheoId({id: x.idsanpham})
             dataSP.sanPham.soluong = x.soluong
             newDs.push(dataSP.sanPham)
-            console.log(dataSP.sanPham)
         }
         setDsSanPham(newDs)        
     })();

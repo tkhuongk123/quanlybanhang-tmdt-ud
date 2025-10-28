@@ -62,6 +62,45 @@ class TaiKhoanController {
         })
     }
 
+    tongTaiKhoan(req, res, next) {
+        const query = "SELECT COUNT(*) as tongTaiKhoan FROM taikhoan";
+        db.query(query, (error, result, field) => {
+            if (error) 
+            {
+                return res.status(400).json({
+                    error: error
+                })
+            } 
+            else 
+            {
+                return res.status(200).json({
+                    message: "Lấy tổng tài khoản thành công",
+                    tongTaiKhoan: result[0].tongTaiKhoan
+                })
+            }
+        })
+    }
+
+    capNhatDiaChi(req, res, next) {
+        const { id, diachi } = req.body;
+        const query = "UPDATE taikhoan SET diachi=? WHERE id=?";
+        db.query(query, [diachi, id], (error, result, field) => {
+            if (error) 
+            {
+                return res.status(400).json({
+                    error: error
+                })
+            } 
+            else 
+            {
+                return res.status(200).json({
+                    message: "Cập nhật địa chỉ thành công",
+                    isUpdated: true
+                })
+            }
+        })
+    }
+
 
 
     them(req, res, next) {

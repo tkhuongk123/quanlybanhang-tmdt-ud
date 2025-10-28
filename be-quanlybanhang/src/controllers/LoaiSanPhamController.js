@@ -17,9 +17,29 @@ class LoaiSanPhamController {
         })
     }
 
+    tongLoaiSanPham(req, res, next) {
+        const query = "SELECT COUNT(*) as tongLoaiSanPham FROM loaisanpham";
+        db.query(query, (error, result, field) => {
+            if (error) 
+            {
+                return res.status(400).json({
+                    error: error
+                })
+            } 
+            else 
+            {
+                return res.status(200).json({
+                    message: "Lấy tổng loại sản phẩm thành công",
+                    tongLoaiSanPham: result[0].tongLoaiSanPham
+                })
+            }
+        })
+    }
+
     them(req, res, next) {
         const { ten, mota } = req.body
         const checkTenLoaiSanPham = /[~`!@#$%^&*()_\-+={}\[\]|\\:;"'<>,.?/]/.test(ten);
+
 
         if (checkTenLoaiSanPham) {
             return res.status(200).json({
@@ -30,7 +50,14 @@ class LoaiSanPhamController {
 
         const queryCheckTenSanPham = "SELECT * FROM loaisanpham WHERE ten = ?";
         db.query(queryCheckTenSanPham, [ten], (error, results) => {
-            if (results.length > 0) {
+            if (error) {
+                return res.status(400).json({ 
+                    error: error,
+                    message: "Loi!"
+                 });
+            }
+            if (results.length > 0) 
+            {
                 return res.status(200).json({
                     inputInvalid: "ten",
                     messageInvalid: "Tên loại sản phẩm đã tồn tại"
@@ -39,11 +66,14 @@ class LoaiSanPhamController {
             const query = "INSERT INTO loaisanpham (ten, mota) VALUES (?, ?)"
             const values = [ten, mota]
             db.query(query, values, (error, result, field) => {
-                if (error) {
+                if (error) 
+                {
                     return res.status(400).json({
                         error: error
                     })
-                } else {
+                } 
+                else 
+                {
                     return res.status(200).json({
                         message: "Thêm loại sản phẩm thành công",
                         loaiSanPham: result.insertId

@@ -13,9 +13,12 @@ function QuanLyLoaiSanPham() {
   useEffect(() => {
     (async () => {
       const data = await layDs();
-      if (data.error) {
+      if (data.error) 
+      {
         console.log(data.error);
-      } else {
+      } 
+      else 
+      {
         setDsLoaiSanPham(data.dsLoaiSanPham);
       }
     })();

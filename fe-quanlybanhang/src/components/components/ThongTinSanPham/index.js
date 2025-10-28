@@ -1,5 +1,6 @@
 import "./ThongTinSanPham.css";
 import formatPrice from "../../../utils/formatPrice";
+import { api } from "../../../services/config";
 
 function ThongTinSanPham(props) {
 
@@ -9,7 +10,11 @@ function ThongTinSanPham(props) {
         <div className="ThongTinSanPham_content">
           <div className="ThongTinSanPham_content-img">
             <img
-              src={`${process.env.PUBLIC_URL}/assets/hinhSanPham/${props.item.id}.jpg`}
+              src={
+                props.item.image ? 
+                `${api}/public/uploads/ProductImages/${props.item.image}`
+                : `${process.env.PUBLIC_URL}/favicon.png`
+              }
               alt="props.item"
             />
           </div>

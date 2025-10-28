@@ -14,7 +14,7 @@ function NhanDon(props) {
       if (data.dsDonHang) {
         const newDs = [];
         for (let x of data.dsDonHang) {
-          if (x.trangthai === "30" && props.nguoidung.idquyen === 0) {
+          if (x.trangthai === "30" && props.nguoidung.idquyen === 1) {
             const data = await layTaiKhoan({ id: x.idmanguoidung });
             if (data.taiKhoan) {
               x.nguoidat = `${data.taiKhoan.tennguoidung} - ${data.taiKhoan.id}`;

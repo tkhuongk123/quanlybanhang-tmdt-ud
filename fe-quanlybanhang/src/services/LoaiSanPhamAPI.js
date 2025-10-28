@@ -10,6 +10,15 @@ export const layDs = async () => {
   }
 };
 
+export const tongLoaiSanPham = async () => {
+  try {
+    const response = await axios.get(`${api}/loaisanpham/tongLoaiSanPham`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const them = async ({ ten, mota }) => {
   try {
     const response = await axios.post(`${api}/loaisanpham/them`, {

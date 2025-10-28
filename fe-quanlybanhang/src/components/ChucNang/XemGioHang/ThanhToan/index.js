@@ -1,48 +1,37 @@
 import formatPrice from "../../../../utils/formatPrice";
 import "./ThanhToan.css";
-import { taoDonHang } from "../../../../services/DonHangAPI";
-import { taoChiTiet } from "../../../../services/ChiTietDonHangAPI";
 import { layNgayGio } from "../../../../utils/ngayGio";
 import { Select } from "antd";
 import { NotifyError, NotifySuccess } from "../../../components/Toast";
+import { thanhToan } from "../../../../services/PaymentAPI";
 
 const { Option } = Select;
 
 function ThanhToan(props) {
-  const thanhToan = async () => {
-    const nguoidung = JSON.parse(sessionStorage.getItem("nguoidung"));
-    const ngay = layNgayGio();
-    const thanhtoan = 1;
-    const trangthai = 30;
-    const tongtien = props.tongTien;
-    const tongsanpham = props.tongSanPham;
-    const idmanguoidung = nguoidung.id;
-    const ghichu = "";
-    const data = await taoDonHang({
-      idmanguoidung,
-      trangthai,
-      thanhtoan,
-      tongtien,
-      tongsanpham,
-      ngay,
-      ghichu,
-    });
-    if (data.error) {
-      NotifyError(data.error);
-    } else {
-      const iddonhang = data.id;
-      for (let x of props.dsSanPham) {
-        const idsanpham = x.id;
-        const soluong = x.soluong;
-        taoChiTiet({ iddonhang, idsanpham, soluong });
-      }
 
-      NotifySuccess("Thanh toán thành công");
-      localStorage.removeItem("giohang");
-      props.setThanhToan("");
-      props.setDsSanPham([]);
+
+  // Hàm gọi backend tạo link MoMo và redirect
+  const handleThanhToan = async () => {
+    try 
+    {
+
+      const dataThanhToan = await thanhToan({tongTien: props.tongTien});
+      if (!dataThanhToan || !dataThanhToan.shortLink) 
+      {
+        NotifyError("Không lấy được link thanh toán MoMo");
+        return;
+      }
+      // Redirect sang MoMo
+      sessionStorage.setItem("tongTien", props.tongTien);
+      sessionStorage.setItem("tongSanPham", props.tongSanPham);
+      sessionStorage.setItem("dsSanPham", JSON.stringify(props.dsSanPham));
+      window.location.href = dataThanhToan.shortLink;
+    } catch (error) {
+      NotifyError("Lỗi kết nối thanh toán MoMo");
     }
   };
+
+  
 
   return (
     <div
@@ -109,7 +98,7 @@ function ThanhToan(props) {
           <button
             className="ThanhToan_content-control-access"
             onClick={() => {
-              thanhToan();
+              handleThanhToan();
             }}
           >
             Thanh toán {formatPrice(props.tongTien)}

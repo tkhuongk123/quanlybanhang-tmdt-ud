@@ -4,6 +4,7 @@ import { laySanPhamTheoLoai } from "../../../../services/SanPhamAPI.js";
 import formatPrice from "../../../../utils/formatPrice.js";
 import { NotifySuccess } from "../../../components/Toast/index.js";
 import ChonSoLuong from "./ChonSoLuong/index.js";
+import { api } from "../../../../services/config.js";
 
 function MonTheoLoai(props) {
   const [dsMon, setDsMon] = useState([]);
@@ -25,7 +26,8 @@ function MonTheoLoai(props) {
 
   function themVaoGio(sanPham) {
     const gioHang = JSON.parse(localStorage.getItem("giohang"));
-    if (!gioHang || gioHang.lenght === 0) {
+    if (!gioHang || gioHang.lenght === 0) 
+    {
       const gioHang = [
         {
           id: sanPham.id,
@@ -33,7 +35,9 @@ function MonTheoLoai(props) {
         },
       ];
       localStorage.setItem("giohang", JSON.stringify(gioHang));
-    } else {
+    } 
+    else 
+    {
       for (let x of gioHang) {
         if (x.id === sanPham.id) {
           x.soluong += 1;
@@ -66,7 +70,11 @@ function MonTheoLoai(props) {
               }}>
                 <div className="MonTheoLoai_item-img">
                   <img
-                    src={`${process.env.PUBLIC_URL}/assets/hinhSanPham/${item.id}.jpg`}
+                    src={
+                          item.image ? 
+                          `${api}/public/uploads/ProductImages/${item.image}`
+                          : `${process.env.PUBLIC_URL}/favicon.png`
+                        }
                     alt="sanpham"
                   />
                 </div>
