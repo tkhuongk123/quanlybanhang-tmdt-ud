@@ -2,9 +2,9 @@ const db = require("../config/db");
 
 class DonHangController {
     taoDonHang(req, res, next) {
-        const {idmanguoidung, trangthai, thanhtoan, tongtien, tongsanpham, ngay, diachi, ghichu} = req.body;
-        const query = "INSERT INTO donhang (idmanguoidung, trangthai, thanhtoan, tongtien, tongsanpham, ngay, diachi, ghichu) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
-        const values = [idmanguoidung, trangthai, thanhtoan, tongtien, tongsanpham, ngay, diachi, ghichu]
+        const {idmanguoidung, trangthai, thanhtoan, tongtien, tienShip, tongsanpham, ngay, diachi, ghichu} = req.body;
+        const query = "INSERT INTO donhang (idmanguoidung, trangthai, thanhtoan, tongtien, tienShip, tongsanpham, ngay, diachi, ghichu) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        const values = [idmanguoidung, trangthai, thanhtoan, tongtien, tienShip, tongsanpham, ngay, diachi, ghichu]
         db.query(query, values, (error, result, field) => {
             if(error) {
                 return res.status(400).json({

@@ -30,8 +30,7 @@ import { LoginLayout } from "../components/Layouts";
 
 
 const khachHangRoutes = [
-    { path: '/', component: TrangChu, },
-    { path: '/chonmon', component: ChonMon, },
+    { path: '/', component: ChonMon, },
     { path: '/auth/giohang', component: GioHang, },
     { path: '/momo/callback', component: MomoCallback, },
     { path: '/donhang', component: DonHang, },

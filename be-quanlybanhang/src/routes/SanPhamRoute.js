@@ -7,6 +7,7 @@ router.post('/laySanPhamTheoId', SanPhamController.laySanPhamTheoId);
 router.get('/layDsSanPham', SanPhamController.layDsSanPham);
 router.get('/tongSanPham', SanPhamController.tongSanPham);
 router.get('/layDsSanPhamPhoBien', SanPhamController.layDsSanPhamPhoBien);
+router.post('/tongDonHangTheoSanPham', SanPhamController.tongDonHangTheoSanPham);
 router.post('/checksanpham', SanPhamController.isExistInDonHang);
 router.post('/them', SanPhamController.them);
 router.post('/sua', SanPhamController.sua);

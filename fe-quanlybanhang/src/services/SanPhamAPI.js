@@ -41,6 +41,17 @@ export const tongSanPham = async () => {
   }
 };
 
+export const tongDonHangTheoSanPham = async ({ idsanpham }) => {
+  try {
+    const response = await axios.post(`${api}/sanpham/tongDonHangTheoSanPham`, {
+      idsanpham
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const layDsSanPhamPhoBien = async () => {
   try {
     const response = await axios.get(`${api}/sanpham/layDsSanPhamPhoBien`);

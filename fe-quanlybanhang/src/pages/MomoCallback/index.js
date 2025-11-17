@@ -16,6 +16,7 @@ function MomoCallback() {
     const thanhtoan = 1;
     const trangthai = 30;
     const tongtien = JSON.parse(sessionStorage.getItem("tongTien"));
+    const tienShip = JSON.parse(sessionStorage.getItem("tienShip"));
     const tongsanpham = JSON.parse(sessionStorage.getItem("tongSanPham"));
     const idmanguoidung = nguoidung.id;
     const diachi = nguoidung.diachi;
@@ -27,6 +28,7 @@ function MomoCallback() {
       trangthai,
       thanhtoan,
       tongtien,
+      tienShip,
       tongsanpham,
       ngay,
       diachi,
@@ -50,6 +52,7 @@ function MomoCallback() {
 
         localStorage.removeItem("giohang");
         sessionStorage.removeItem("tongTien");
+        sessionStorage.removeItem("tienShip");
         sessionStorage.removeItem("tongSanPham");
         sessionStorage.removeItem("dsSanPham");
         NotifySuccess("Thanh toán thành công!");

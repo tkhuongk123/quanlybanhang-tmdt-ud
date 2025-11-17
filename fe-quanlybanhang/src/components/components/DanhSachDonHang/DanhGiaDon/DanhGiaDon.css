@@ -52,6 +52,11 @@
     font-size: 18px;
 }
 
+.DanhGiaDon_form-input {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
 .DanhGiaDon_form-textarea {
     font-size: 18px;
 }

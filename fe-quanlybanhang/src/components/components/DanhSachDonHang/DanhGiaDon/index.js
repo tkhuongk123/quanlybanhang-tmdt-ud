@@ -16,13 +16,14 @@ function DanhGiaDon(props) {
     (async() => {
       const data = await layDanhGiaTheoId({iddonhang: props.iddonhang})
       if(data.danhGia) {
-        setDanhGiaGet(data.danhGia)
+        setDanhGiaGet(data.danhGia);
       }
     })()
   }, [props])
 
   const Submit = async () => {
     const diemdanhgia = parseInt(diem);
+    const tieude = document.querySelector(".DanhGiaDon_form-input").value;
     const noidung = document.querySelector(".DanhGiaDon_form-textarea").value;
     const idmanguoidung = props.idmanguoidung;
     const iddonhang = props.iddonhang;
@@ -30,6 +31,7 @@ function DanhGiaDon(props) {
 
     const data = danhGia({
       idmanguoidung,
+      tieude,
       noidung,
       diemdanhgia,
       ngay,
@@ -38,7 +40,8 @@ function DanhGiaDon(props) {
     if (data.error) {
       NotifyError(data.error);
     } else {
-      setDanhGiaGet({ idmanguoidung, iddonhang, diemdanhgia, noidung, ngay });
+      setDanhGiaGet({ idmanguoidung, iddonhang, diemdanhgia, tieude, noidung, ngay });
+      
       NotifySuccess("Đánh giá thành công");
     }
   };
@@ -95,6 +98,22 @@ function DanhGiaDon(props) {
               </div>
             </Option>
           </Select>
+          <h3>Tiêu đề</h3>
+          {danhGiaGet ? (
+            <Input 
+              rows={4}
+              placeholder="Nhập nội dung tại đây..."
+              className="DanhGiaDon_form-input"
+              value={danhGiaGet.tieude}
+              disabled={true}
+            />
+          ) : (
+            <Input
+              rows={4}
+              placeholder="Nhập nội dung tại đây..."
+              className="DanhGiaDon_form-input"
+            />
+          )}
 
           <h3>Nhận xét</h3>
           {danhGiaGet ? (

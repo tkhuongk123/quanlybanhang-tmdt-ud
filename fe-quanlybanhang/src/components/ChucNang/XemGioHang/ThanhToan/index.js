@@ -14,8 +14,8 @@ function ThanhToan(props) {
   const handleThanhToan = async () => {
     try 
     {
-
-      const dataThanhToan = await thanhToan({tongTien: props.tongTien});
+      
+      const dataThanhToan = await thanhToan({tongTien: props.tongTien, tienShip: props.tienShip});
       if (!dataThanhToan || !dataThanhToan.shortLink) 
       {
         NotifyError("Không lấy được link thanh toán MoMo");
@@ -23,6 +23,7 @@ function ThanhToan(props) {
       }
       // Redirect sang MoMo
       sessionStorage.setItem("tongTien", props.tongTien);
+      sessionStorage.setItem("tienShip", props.tienShip);
       sessionStorage.setItem("tongSanPham", props.tongSanPham);
       sessionStorage.setItem("dsSanPham", JSON.stringify(props.dsSanPham));
       window.location.href = dataThanhToan.shortLink;

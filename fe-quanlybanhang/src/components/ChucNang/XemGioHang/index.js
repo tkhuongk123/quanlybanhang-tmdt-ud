@@ -17,9 +17,16 @@ function XemGioHang() {
   const [diaChi, setDiaChi] = useState("");
   const [thanhToan, setThanhToan] = useState(<span></span>);
   const [updateAddress, setUpdateAddress] = useState(<span></span>);
+  const [tienShip, setTienShip] = useState(0);
 
   useEffect(() => {
     const diachiData = JSON.parse(sessionStorage.getItem("nguoidung")).diachi || "";
+    const khoangCach = JSON.parse(sessionStorage.getItem("khoangcach")) || 0;
+    if(khoangCach > 0)
+    {
+      const ship = tinhTienShip(khoangCach);
+      setTienShip(ship);
+    }
     setDiaChi(diachiData);
   }, [diaChi]);
 
@@ -47,13 +54,28 @@ function XemGioHang() {
     }
   }, []);
 
+  function tinhTienShip(khoangCach) {
+    let ship = 0;
+    if(khoangCach >= 4)
+    {
+      ship = 15000 + Math.ceil(khoangCach - 3) * 3000;
+    }
+    else
+    {
+      ship = 15000;
+    }
+    return ship;
+  }
+
   function tinhTongTien() {
     let tong = 0;
     for (let x of dsSanPham) {
       tong += x.soluong * x.dongia;
     }
-    return tong;
+    return tong + tienShip;
   }
+
+
 
   function tang(sanPham) {
     sanPham.soluong++;
@@ -99,6 +121,7 @@ function XemGioHang() {
         setThanhToan={setThanhToan}
         tongSanPham={dsSanPham.length}
         tongTien={tinhTongTien()}
+        tienShip={tienShip}
         dsSanPham={dsSanPham}
         setDsSanPham={setDsSanPham}
       />
@@ -115,8 +138,6 @@ function XemGioHang() {
             <MapPin
               style={{ transform: 'translateY(3px)' }} 
             />
-
-    
             <Input
               bordered={false}
               style={{ fontSize: "18px", width: "500px" }}
@@ -189,6 +210,10 @@ function XemGioHang() {
             <div>
               <span>Tổng sản phẩm: </span>
               <span className="XemGioHang_don-primary">{dsSanPham.length}</span>
+            </div>
+            <div>
+              <span>Tiền ship: </span>
+              <span className="XemGioHang_don-primary">{formatPrice(tienShip)}</span>
             </div>
             <div>
               <span>Tổng tiền: </span>

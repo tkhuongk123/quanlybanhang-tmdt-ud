@@ -10,6 +10,28 @@ export const layDsDanhGia = async () => {
   }
 };
 
+export const layDsDanhGiaChoSanPham = async ({ idsanpham }) => {
+  try {
+    const response = await axios.post(`${api}/danhgia/layDsDanhGiaChoSanPham`, {
+      idsanpham
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const laySoLuotDanhGiaChoSanPham = async ({ idsanpham }) => {
+  try {
+    const response = await axios.post(`${api}/danhgia/laySoLuotDanhGiaChoSanPham`, {
+      idsanpham
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const layDanhGiaTheoId = async ({ iddonhang }) => {
   try {
     const response = await axios.post(`${api}/danhgia/layDanhGiaTheoId`, {
@@ -23,6 +45,7 @@ export const layDanhGiaTheoId = async ({ iddonhang }) => {
 
 export const danhGia = async ({
   idmanguoidung,
+  tieude,
   noidung,
   diemdanhgia,
   ngay,
@@ -31,6 +54,7 @@ export const danhGia = async ({
   try {
     const response = await axios.post(`${api}/danhgia/danhGia`, {
       idmanguoidung,
+      tieude,
       noidung,
       diemdanhgia,
       ngay,

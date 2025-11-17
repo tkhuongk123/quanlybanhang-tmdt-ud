@@ -15,7 +15,7 @@ function DanhGiaDichVu() {
       if (data.dsDonHang) {
         const newDs = []
         for(let x of data.dsDonHang) {
-            if(x.trangthai === '11' || x.trangthai === '12') {
+            if(x.trangthai === '11') {
                 newDs.push(x)
             }
         }

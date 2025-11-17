@@ -115,13 +115,6 @@ function Toolbar() {
           </li>
           <li
             onClick={() => {
-              navigate("/chonmon");
-            }}
-          >
-            Chọn món
-          </li>
-          <li
-            onClick={() => {
               navigate("/auth/giohang");
             }}
           >

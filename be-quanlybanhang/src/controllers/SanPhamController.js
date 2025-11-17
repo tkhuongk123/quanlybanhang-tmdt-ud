@@ -123,6 +123,44 @@ class SanPhamController {
         })
     }
 
+    tongDonHangTheoSanPham(req, res, next) {
+        const { idsanpham } = req.body; 
+        const query = `
+            SELECT 
+                sp.id AS idsanpham,
+                sp.ten AS tensanpham,
+                COUNT(DISTINCT ctdh.iddonhang) AS sodonhang
+            FROM chitietdonhang ctdh
+            JOIN sanpham sp ON sp.id = ctdh.idsanpham
+            JOIN donhang dh ON dh.id = ctdh.iddonhang
+            WHERE sp.id = ? AND dh.trangthai = 11
+            GROUP BY sp.id, sp.ten
+        `;
+
+        db.query(query, [idsanpham], (error, result, field) => {
+            if (error) {
+                return res.status(400).json({ error });
+            }
+
+            // nếu không có đơn nào thì trả về 0
+            if (result.length === 0) {
+                return res.status(200).json({
+                    message: "Sản phẩm chưa có đơn hàng nào",
+                    idsanpham: idsanpham,
+                    sodonhang: 0
+                });
+            }
+
+            return res.status(200).json({
+                message: "Lấy số lượng đơn hàng theo sản phẩm thành công",
+                idsanpham: result[0].idsanpham,
+                tensanpham: result[0].tensanpham,
+                sodonhang: result[0].sodonhang
+            });
+        });
+    }
+
+
     layDsSanPhamPhoBien(req, res, next) {
         const query = `SELECT
                             sp.id,

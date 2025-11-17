@@ -725,6 +725,7 @@ function DanhSachDonHang(props) {
           },
 
           { text: `Tổng sản phẩm: ${item.tongsanpham}`, margin: [0, 20, 0, 0] },
+          { text: `Tiền ship: ${item.tienShip.toLocaleString()} VND` },
           { text: `Tổng tiền: ${item.tongtien.toLocaleString()} VND` }
         ],
         styles: {
